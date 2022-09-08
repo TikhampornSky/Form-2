@@ -1,0 +1,20 @@
+<h1>Fill Form</h1>
+<p> Number of Subject: <%= @numberSubject %></P>
+<%= form_with url: "/main/test", method: :get do |form| %>
+    <%= form.hidden_field :numberSubject, value: @numberSubject %>
+    <%= form.hidden_field :isAgain, value: true %>
+    <% @numberSubject.times do |i| %>
+        <%= form.label :subject, "ชื่อวิชา #{i+1}: " %> <%= form.text_field :"subject#{i+1}", :value => params["subject#{i+1}"] %>
+        <%= form.label :score, "คะแนนวิชา #{i+1}: " %> <%= form.number_field :"score#{i+1}" , :value => params["score#{i+1}"] %>
+        <% if params["subject#{i+1}"]== "" %>
+        <%= form.label "subject#{i+1}", "|!!| รายวิชาที่#{i+1}ยังไม่มี 'ชื่อวิชา' "%>
+        <% end %>
+        <% if params["score#{i+1}"] == ""%>
+            <%= form.label "score#{i+1}", "|!!| รายวิชาที่#{i+1}ยังไม่มี 'คะแนน' " %>
+        <% end %>
+        <br>
+        <br>
+    <% end %>
+    <br>
+    <%= form.submit "submit" %>
+<% end %>
