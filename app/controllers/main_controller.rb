@@ -35,7 +35,20 @@ class MainController < ApplicationController
       if (@isEmp)
         
       else
-        redirect_to "/main/test2?sumScore=#{@sumScore}&maxSubject=#{@maxSubject}"
+        for i in 1..@numberSubject do
+          @check = Student.where(subject: params["subject#{i}"]).first
+          puts @check
+          if (@check != nil)
+            @check.points = params["score#{i}"].to_i
+            @check.save
+          else
+            @tmp = Student.new
+            @tmp.subject = params["subject#{i}"]
+            @tmp.points = params["score#{i}"].to_i
+            @tmp.save
+          end
+        end
+        redirect_to "/score/list?sumScore=#{@sumScore}&maxSubject=#{@maxSubject}"
       end
     else
       @numberSubject = params[:numberSubject].to_i
@@ -43,7 +56,7 @@ class MainController < ApplicationController
   end
 
   def test2
-    @sumScore = params[:sumScore].to_i
-    @maxSubject = params[:maxSubject]
+    # @sumScore = params[:sumScore].to_i
+    # @maxSubject = params[:maxSubject]
   end
 end

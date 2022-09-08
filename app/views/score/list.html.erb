@@ -1,0 +1,36 @@
+<h1>Score#list</h1>
+
+<h1> Show Score Result </h1>
+<br>
+<div>
+    <h2> Sum of the score: <%= @sumScore %> </h2>
+    <h2> Subject that has max Score: <%= @maxSubject %> </h2>
+    <hr>
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>Subject</th>
+            <th>score</th>
+            <th></th>
+        </tr> 
+        <% @data.each_with_index do |element, index| %>
+            <tr>
+                <%= form_with url: "/main/test", method: :get do |form| %>
+                    <td> <%= "#{index+1}" %> </td>
+                    <td> <%= element[0] %></td>
+                    <td> <%= element[1] %></td>
+                    <td>
+                        <%= form.submit "Edit" %>
+                        <%= form.submit "Delete" %>
+                    </td>
+                <% end %>
+            </tr>
+        <% end %>
+    </table
+</div>
+
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
