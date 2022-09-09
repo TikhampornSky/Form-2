@@ -3,5 +3,6 @@
 <p> Please Select Number Of Subject </p>
 <%= form_with url: "/main/test", method: :get do |form| %>
     <%= form.select :numberSubject, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]%>
+    <%= form.hidden_field :isFirst, value: true %>
     <%= form.submit "submit" %>
 <% end %>

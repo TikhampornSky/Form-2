@@ -15,16 +15,20 @@
         </tr> 
         <% @data.each_with_index do |element, index| %>
             <tr>
-                <%= form_with url: "/main/test", method: :get do |form| %>
-                    <td> <%= "#{index+1}" %> </td>
-                    <td> <%= element[0] %></td>
-                    <td> <%= element[1] %></td>
-                    <td>
+                <td> <%= "#{index+1}" %> </td>
+                <td> <%= element[0] %></td>
+                <td> <%= element[1].to_i %></td>
+
+                <td>
+                    <%= form_with url: "/score/edit", method: :get do |form| %>
+                        <%= form.hidden_field :subject_edit, value: element[0] %>
+                        <%= form.hidden_field :point_edit, value: element[1].to_i %>
+                        <%= form.hidden_field :id_edit, value: element[2] %>
                         <%= form.submit "Edit" %>
                         <%= form.submit "Delete" %>
-                    </td>
-                <% end %>
-            </tr>
+                    <% end %>
+                </td>
+             </tr>
         <% end %>
     </table
 </div>

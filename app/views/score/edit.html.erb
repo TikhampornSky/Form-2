@@ -1,0 +1,21 @@
+<h1>Edit Page </h1>
+<h2> you can edit the detail, and submit to update your data</h2>
+
+<%= form_with url: "/score/edit", method: :get do |form| %>
+    <%= form.label :subject, "ชื่อวิชา: " %> <%= form.text_field :"subject_update", :value => @subject_edit %>
+    <%= form.label :score, "คะแนนวิชานี้: " %> <%= form.number_field :"point_update" , :value => @point_edit %>
+    <%= form.hidden_field :fromEdit, value: true %>
+    <%= form.hidden_field :id_update, value: @id_edit %>
+    <% if @isSubEmp %>
+        <%= form.label "Sub-warin", "|!!| 'ชื่อ'ของรายวิชานี้ห้ามเป็นช่องว่าง" %>
+    <% end %>
+    <% if @isScoreEmp %>
+        <%= form.label "Score-warn", "|!!| 'คะแนน'ของรายวิชาห้ามเป็นช่องว่าง" %>
+    <% end %>
+    <% if @updateSuccess %>
+        <%= form.label "success", "การอัปโหลดเสร็จสมบูรณ์ เย้ เย้ ;)" %>
+    <% end %>
+    <br>
+    <%= form.submit "submit" %>
+    <br>
+<% end %>

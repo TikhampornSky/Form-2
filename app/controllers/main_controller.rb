@@ -21,7 +21,7 @@ class MainController < ApplicationController
           @maxSubject = @subject
         end
       
-        if (@subject === "")
+        if (@subject.strip === "")
           @isEmp = true
         else
           @subjectOld = @subjectOld.append(@subject)
@@ -36,14 +36,13 @@ class MainController < ApplicationController
         
       else
         for i in 1..@numberSubject do
-          @check = Student.where(subject: params["subject#{i}"]).first
-          puts @check
+          @check = Student.where(subject: params["subject#{i}"].strip).first
           if (@check != nil)
             @check.points = params["score#{i}"].to_i
             @check.save
           else
             @tmp = Student.new
-            @tmp.subject = params["subject#{i}"]
+            @tmp.subject = params["subject#{i}"].strip    #.strip = avoid 'blank'
             @tmp.points = params["score#{i}"].to_i
             @tmp.save
           end
@@ -51,6 +50,7 @@ class MainController < ApplicationController
         redirect_to "/score/list?sumScore=#{@sumScore}&maxSubject=#{@maxSubject}"
       end
     else
+      @isFirst = params[:isFirst]
       @numberSubject = params[:numberSubject].to_i
     end
   end

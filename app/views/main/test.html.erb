@@ -6,7 +6,7 @@
     <% @numberSubject.times do |i| %>
         <%= form.label :subject, "ชื่อวิชา #{i+1}: " %> <%= form.text_field :"subject#{i+1}", :value => params["subject#{i+1}"] %>
         <%= form.label :score, "คะแนนวิชา #{i+1}: " %> <%= form.number_field :"score#{i+1}" , :value => params["score#{i+1}"] %>
-        <% if params["subject#{i+1}"]== "" %>
+        <% if !@isFirst && (params["subject#{i+1}"] == nil || params["subject#{i+1}"].strip == "") %>
         <%= form.label "subject#{i+1}", "|!!| รายวิชาที่#{i+1}ยังไม่มี 'ชื่อวิชา' "%>
         <% end %>
         <% if params["score#{i+1}"] == ""%>
