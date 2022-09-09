@@ -38,8 +38,7 @@ class MainController < ApplicationController
         for i in 1..@numberSubject do
           @check = Student.where(subject: params["subject#{i}"].strip).first
           if (@check != nil)
-            @check.points = params["score#{i}"].to_i
-            @check.save
+            Student.where(subject: params["subject#{i}"].strip).update_all(points: params["score#{i}"].to_i)
           else
             @tmp = Student.new
             @tmp.subject = params["subject#{i}"].strip    #.strip = avoid 'blank'

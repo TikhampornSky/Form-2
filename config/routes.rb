@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'main/test2'
   get 'main/test' => 'score/list'
   get 'score/edit'
+  get 'score/edit' => 'score/list' 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

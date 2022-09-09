@@ -3,6 +3,11 @@ class ScoreController < ApplicationController
     @sumScore = params[:sumScore].to_i
     @maxSubject = params[:maxSubject]
     #------------------------------------------
+    @commit = params[:commit]
+    if (@commit == "Delete")
+      Student.delete(params[:id_edit])
+    end
+    #------------------------------------------
     #@subject1 = Student.first
     @data = []
     Student.find_each do |students|
@@ -31,16 +36,10 @@ class ScoreController < ApplicationController
       if (@isSubEmp || @isScoreEmp)
 
       else
-        @check = Student.where(id: @id_update).first                         #Update data
-        @checkSubjectName = Student.where(subject: @subject_update).first
-        if (@checkSubjectName != nil)                                        #In case "Duplicate name" ==> Just Update
-          @checkSubjectName.points = @point_update.to_i
-          @checkSubjectName.save
-        else                                         
-          @check.subject = @subject_update.strip
-          @check.points = @point_update.to_i
-          @check.save
-        end
+        @check = Student.where(id: @id_update).first                         #Update data           
+        @check.subject = @subject_update.strip
+        @check.points = @point_update.to_i
+        @check.save
         @updateSuccess = true
       end
 
@@ -48,10 +47,6 @@ class ScoreController < ApplicationController
       @point_edit = @point_update
       @id_edit = @id_update
     else                                    #for first time visit this page
-      @isDelete = params[:commit]
-      if (@isDelete == "Delete")
-        redirect_to "/score/temp"
-      end
       @subject_edit = params[:subject_edit]
       @point_edit = params[:point_edit].to_i
       @id_edit = params[:id_edit].to_i

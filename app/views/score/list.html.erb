@@ -12,6 +12,7 @@
             <th>Subject</th>
             <th>score</th>
             <th></th>
+            <th></th>
         </tr> 
         <% @data.each_with_index do |element, index| %>
             <tr>
@@ -25,9 +26,18 @@
                         <%= form.hidden_field :point_edit, value: element[1].to_i %>
                         <%= form.hidden_field :id_edit, value: element[2] %>
                         <%= form.submit "Edit" %>
+                    <% end %>
+                </td>
+                
+                <td>
+                    <%= form_with url: "/score/list", method: :get do |form| %>
+                        <%= form.hidden_field :sumScore, value: @sumScore %>
+                        <%= form.hidden_field :maxSubject, value: @maxSubject %>
+                        <%= form.hidden_field :id_edit, value: element[2] %>
                         <%= form.submit "Delete" %>
                     <% end %>
                 </td>
+
              </tr>
         <% end %>
     </table
