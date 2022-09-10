@@ -46,7 +46,8 @@ class MainController < ApplicationController
             @tmp.save
           end
         end
-        redirect_to "/score/list?sumScore=#{@sumScore}&maxSubject=#{@maxSubject}"
+        #redirect_to "/score/list?sumScore=#{@sumScore}&maxSubject=#{@maxSubject}"
+        redirect_to "/main/test2?sumScore=#{@sumScore}&maxSubject=#{@maxSubject}"
       end
     else
       @isFirst = params[:isFirst]
@@ -55,7 +56,7 @@ class MainController < ApplicationController
   end
 
   def test2
-    # @sumScore = params[:sumScore].to_i
-    # @maxSubject = params[:maxSubject]
+    @sumScore = params[:sumScore].to_i
+    @maxSubject = params[:maxSubject]
   end
 end

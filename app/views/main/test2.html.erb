@@ -1,6 +1,8 @@
-<h1> Show Result </h1>
+<h1> Show Result that you fill </h1>
 <br>
 <div>
     <h2> Sum of the score: <%= @sumScore %> </h2>
     <h2> Subject that has max Score: <%= @maxSubject %> </h2>
 </div>
+<br>
+<%= button_to "Go to List of 'ALL' Data", '/score/list', method: :get %>

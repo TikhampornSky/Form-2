@@ -1,8 +1,5 @@
 class ScoreController < ApplicationController
   def list
-    @sumScore = params[:sumScore].to_i
-    @maxSubject = params[:maxSubject]
-    #------------------------------------------
     @commit = params[:commit]
     if (@commit == "Delete")
       Student.delete(params[:id_edit])
