@@ -10,8 +10,16 @@ class ScoreController < ApplicationController
     #------------------------------------------
     #@subject1 = Student.first
     @data = []
+    @sumScoreAll = 0
+    @maxScoreAll = -1
+    @maxSubjectAll = ""
     Student.find_each do |students|
       @data.append([students.subject, students.points, students.id])
+      @sumScoreAll += students.points
+      if (students.points >= @maxScoreAll)
+        @maxScoreAll = students.points.to_i
+        @maxSubjectAll = students.subject
+      end
     end
   end
 
